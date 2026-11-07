@@ -200,6 +200,22 @@ function setFile(file) {
   }
   pickedFile = file;
   fileNameBox.textContent = `${file.name}（${sizeMB.toFixed(1)} MB）`;
+  if (sizeMB > 50) {
+    showResult('warn', `文件 ${sizeMB.toFixed(1)}MB 较大，上传需要较长时间，建议先压缩到 50MB 以内再传（播放也更流畅）`);
+  }
+}
+
+async function withTimer(text, fn) {
+  const start = Date.now();
+  const tick = setInterval(() => {
+    const sec = Math.round((Date.now() - start) / 1000);
+    document.getElementById('progressText').textContent = `${text}，已用 ${sec} 秒（勿关闭页面）`;
+  }, 1000);
+  try {
+    return await fn();
+  } finally {
+    clearInterval(tick);
+  }
 }
 
 dropZone.addEventListener('click', () => fileInput.click());
@@ -270,11 +286,13 @@ uploadBtn.addEventListener('click', async () => {
     };
     list.unshift(record);
 
-    setProgress(45, '提交视频（' + sizeMB.toFixed(1) + 'MB，勿关闭页面）…');
-    const videoBlob = await api('/git/blobs', {
-      method: 'POST',
-      body: JSON.stringify({ content: videoB64, encoding: 'base64' })
-    });
+    setProgress(45, '提交视频（' + sizeMB.toFixed(1) + 'MB）…');
+    const videoBlob = await withTimer('提交视频 ' + sizeMB.toFixed(1) + 'MB', () =>
+      api('/git/blobs', {
+        method: 'POST',
+        body: JSON.stringify({ content: videoB64, encoding: 'base64' })
+      })
+    );
 
     let coverBlob = null;
     if (coverB64) {
@@ -337,11 +355,23 @@ uploadBtn.addEventListener('click', async () => {
     }, 4000);
   } catch (e) {
     document.getElementById('progressWrap').style.display = 'none';
-    const hint = e.status === 403 ? '当前令牌无权写入该仓库' :
-      e.status === 409 || e.status === 422 ? '仓库刚刚有新提交，请重试' : e.message;
-    showResult('err', '上传失败：' + hint);
     uploadBtn.disabled = false;
     uploadBtnText.textContent = '上传并发布';
+
+    if (e.status === 401) {
+      localStorage.removeItem(TOKEN_KEY);
+      token = '';
+      document.getElementById('uploadScreen').style.display = 'none';
+      document.getElementById('authScreen').style.display = 'block';
+      authErr.textContent = '令牌已失效，请重新创建并粘贴';
+      tokenInput.value = '';
+      return;
+    }
+
+    const hint = e.status === 403 ? '当前令牌无权写入该仓库' :
+      e.status === 413 ? '文件过大，GitHub 拒绝了请求，请压缩到 50MB 以内' :
+      e.status === 409 || e.status === 422 ? '仓库刚刚有新提交，请重试' : e.message;
+    showResult('err', '上传失败：' + hint);
   }
 });
 
