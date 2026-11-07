@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>视频详情 · EM丶小陈的Lab=01音MAD收藏集</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <div class="brand">
+        <span class="dot"></span>
+        <span class="brand-text">EM丶小陈的</span>
+        <span class="lab-badge">Lab=01</span>
+        <span class="brand-text">音MAD收藏集</span>
+      </div>
+      <div class="spacer"></div>
+      <button id="themeToggle" class="theme-toggle" title="切换到亮色模式" aria-label="切换主题"></button>
+      <a href="index.html" class="back-link">← 返回列表</a>
+    </nav>
+  </header>
+
+  <main class="container detail-wrap">
+    <div id="player" class="player-wrap"></div>
+    <div class="detail-grid">
+      <div class="detail-main">
+        <h1 id="title"></h1>
+        <p id="desc" class="detail-desc"></p>
+        <div id="tags" class="tag-list"></div>
+      </div>
+      <aside class="detail-side">
+        <div class="meta-row"><span class="label">作者</span><span class="value" id="author"></span></div>
+        <div class="meta-row"><span class="label">最早发布日期</span><span class="value" id="publishDate"></span></div>
+        <div class="meta-row"><span class="label">收录时间</span><span class="value" id="createdAt"></span></div>
+        <div class="meta-row"><span class="label">原视频链接</span><span class="value" id="originalUrl"></span></div>
+      </aside>
+    </div>
+  </main>
+
+  <script src="js/theme.js"></script>
+  <script src="js/video.js"></script>
+</body>
+</html>

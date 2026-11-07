@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EM丶小陈的Lab=01音MAD收藏集</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <div class="brand">
+        <span class="dot"></span>
+        <span class="brand-text">EM丶小陈的</span>
+        <span class="lab-badge">Lab=01</span>
+        <span class="brand-text">音MAD收藏集</span>
+      </div>
+      <div class="spacer"></div>
+      <button id="themeToggle" class="theme-toggle" title="切换到亮色模式" aria-label="切换主题"></button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <p class="page-sub">在这里浏览并播放我收录的音MAD作品</p>
+
+    <div class="toolbar">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input id="searchInput" type="text" placeholder="搜索标题或作者…" autocomplete="off" />
+      </div>
+      <select id="sortSelect">
+        <option value="newest">发布日期 新→旧</option>
+        <option value="oldest">发布日期 旧→新</option>
+        <option value="recent">收录时间 新→旧</option>
+      </select>
+    </div>
+
+    <div id="grid" class="grid"></div>
+    <div id="empty" class="empty" style="display:none">
+      <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="4" width="20" height="16" rx="2"/>
+        <path d="m10 9 5 3-5 3z" fill="currentColor" stroke="none"/>
+      </svg>
+      <p>暂无匹配的收藏</p>
+    </div>
+    <div id="pagination" class="pagination"></div>
+  </main>
+
+  <script src="js/theme.js"></script>
+  <script src="js/list.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "video-archive",
+  "version": "1.0.0",
+  "description": "Personal video collection archive site",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "upload": "node upload.js",
+    "preview": "node server.js",
+    "delete": "node delete.js"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "express": "^4.19.2"
+  }
+}

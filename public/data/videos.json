@@ -1,0 +1,18 @@
+[
+  {
+    "id": "33ee0e94-5eef-4f1b-a88e-b92db866e9fe",
+    "title": "我的示例视频",
+    "originalUrl": "https://example.com/original",
+    "author": "示例作者",
+    "publishDate": "2024-08-20",
+    "description": "这是一个用于测试的示例视频。删除本条记录后即为空站状态。",
+    "tags": [
+      "示例",
+      "测试"
+    ],
+    "coverImage": "media/sample-cover.jpg",
+    "videoFileName": "sample.mp4",
+    "videoUrl": "media/sample.mp4",
+    "createdAt": "2026-11-05T12:55:12.712Z"
+  }
+]
